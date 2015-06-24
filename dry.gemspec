@@ -14,4 +14,10 @@ Gem::Specification.new do |s|
   s.files       = `git ls-files lib`.split $/
 
   s.add_dependency 'railties', '~> 4.2.2'
+
+  s.add_development_dependency 'activerecord',  '~> 4.2'
+  s.add_development_dependency 'capybara',      '~> 2.4'
+  s.add_development_dependency 'rake',          '~> 10.4'
+  s.add_development_dependency 'rspec-rails',   '~> 3.3'
+  s.add_development_dependency 'sqlite3',       '~> 1.3'
 end

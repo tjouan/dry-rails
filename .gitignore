@@ -1,3 +1,5 @@
 /Gemfile-custom.rb
 /Gemfile.lock
 /tmp/
+/spec/dummy/db/*.sqlite3
+/spec/dummy/log/*.log
