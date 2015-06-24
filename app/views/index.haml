@@ -1,0 +1,45 @@
+%h1
+  Listing
+  = @resource.plural_name
+
+
+- if @collection.empty?
+  %p
+    No
+    = @resource.singular_name
+    found.
+
+- else
+  %table.list
+    %thead
+      %tr
+        %th
+          = @resource.singular_name.capitalize
+        - @resource.attrs_read.each do |attr|
+          %th= attr.capitalize
+        - if @resource.edit? || @resource.destroy?
+          %th.list-actions
+            Actions
+
+    %tbody
+      - @collection.each do |record|
+        %tr
+          %td
+            = link_to record, edit_path(record)
+          - @resource.attrs_read.each do |attr|
+            %td= record.send attr
+          - if @resource.edit? || @resource.destroy?
+            %td.list-actions
+              %ul.actions
+                - if @resource.edit?
+                  = link_to 'Edit', edit_path(record)
+                - if @resource.destroy?
+                  = link_to 'Destroy', record, method: :delete,
+                    data: { confirm: t('confirmation',
+                      default: 'Are you sure?') }
+
+
+%ul.actions
+  - if @resource.new?
+    %li
+      = link_to "New #{@resource.singular_name}", new_path(@resource)

@@ -5,7 +5,8 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_view/railtie"
 
-Bundler.require(*Rails.groups)
+#Bundler.require(*Rails.groups)
+require 'haml'
 
 require 'dry'
 
@@ -25,5 +26,7 @@ module Dummy
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.autoload_paths += [Dry.lib_path]
   end
 end
