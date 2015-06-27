@@ -10,16 +10,16 @@
           %br
           = f.send type, attr
 
-      - if @record.errors.any?
-        .errors
-          %p
-            = pluralize @record.errors.size, 'error'
-            prohibited this
-            = @resource.singular_name
-            from being saved:
-          %ul
-            - @record.errors.full_messages.each do |error|
-              %li= error
+    - if @record.errors.any?
+      .errors
+        %p
+          = pluralize @record.errors.size, 'error'
+          prohibited this
+          = @resource.singular_name
+          from being saved:
+        %ul
+          - @record.errors.full_messages.each do |error|
+            %li= error
 
   %ul.actions
     %li
