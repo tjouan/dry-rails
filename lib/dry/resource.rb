@@ -8,6 +8,7 @@ module Dry
 
     ATTR_TYPE_TO_FORM_FIELD = {
       boolean:  :check_box,
+      decimal:  :number_field,
       integer:  :number_field,
       string:   :text_field,
       text:     :text_area
