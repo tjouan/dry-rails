@@ -72,8 +72,14 @@ module Dry
     def resource
       @resource ||= Resource.new(controller_name.classify.constantize,
         attrs_read:   self.class._dry_attrs[:read],
-        attrs_write:  self.class._dry_attrs[:write]
+        attrs_write:  self.class._dry_attrs[:write],
+        routes:       resource_routes
       )
+    end
+
+    def resource_routes
+      ResourceRoutes.new(Rails.application.routes.routes, controller_path)
+        .routes
     end
 
     def resource_scope

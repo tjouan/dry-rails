@@ -3,7 +3,7 @@ module Dry
     DEFAULT_OPTIONS = {
       attrs_read:   [],
       attrs_write:  {},
-      route_format: '%s'
+      routes:       []
     }
 
     ATTR_TYPE_TO_FORM_FIELD = {
@@ -60,15 +60,7 @@ module Dry
   private
 
     def has_route_for? action
-      routes_for_resource(model_name.route_key).any? do |e|
-        e.defaults[:action] == action.to_s
-      end
-    end
-
-    def routes_for_resource resource_key
-      @_resource_routes ||= Rails.application.routes.routes.select do |e|
-        e.defaults[:controller] == @options[:route_format] % resource_key
-      end
+      @options[:routes].include? action
     end
   end
 end

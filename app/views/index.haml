@@ -34,7 +34,7 @@
                 - if @resource.edit?
                   = link_to 'Edit', edit_path(record)
                 - if @resource.destroy?
-                  = link_to 'Destroy', record, method: :delete,
+                  = link_to 'Destroy', record_path(record), method: :delete,
                     data: { confirm: t('confirmation',
                       default: 'Are you sure?') }
 
