@@ -14,6 +14,8 @@ module Dry
       text:     :text_area
     }
 
+    ATTR_RELATION_PATTERN = /_id\z/.freeze
+
     extend Forwardable
     def_delegators :@model, :model_name
 
@@ -54,7 +56,12 @@ module Dry
 
     def each_form_fields
       attrs_write.each do |e|
-        yield e, ATTR_TYPE_TO_FORM_FIELD[@model.column_types[e.to_s].type]
+        if e =~ ATTR_RELATION_PATTERN
+          yield e,
+            @model.reflections[e.to_s.sub ATTR_RELATION_PATTERN, ''].klass
+        else
+          yield e, ATTR_TYPE_TO_FORM_FIELD[@model.column_types[e.to_s].type]
+        end
       end
     end
 

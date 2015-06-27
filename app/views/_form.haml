@@ -2,13 +2,19 @@
   %fieldset
     - @resource.each_form_fields do |attr, type|
       %p.field
-        - if type == :check_box
-          = f.send type, attr
-          = f.label attr
-        - else
+        - case type
+        - when Class
           = f.label attr
           %br
-          = f.send type, attr
+          = f.collection_select attr, type.send(:all), :id, :to_s
+        - when Symbol
+          - if type == :check_box
+            = f.send type, attr
+            = f.label attr
+          - else
+            = f.label attr
+            %br
+            = f.send type, attr
 
     - if @record.errors.any?
       .errors
