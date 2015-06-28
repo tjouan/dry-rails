@@ -43,3 +43,5 @@
   - if @resource.new?
     %li
       = link_to "New #{@resource.singular_name}", new_path(@resource)
+  - if lookup_context.exists?('index_actions_extra', %w[dry], true)
+    = render 'dry/index_actions_extra'
