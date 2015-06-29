@@ -6,5 +6,10 @@
 = render 'form'
 
 %ul.actions
+  - if @resource.relations?
+    - @resource.relations.each do |relation|
+      - relation = @record.send(relation)
+      %li= link_to relation.model_name.human.pluralize,
+        relation_path(@record, relation)
   %li
     = link_to 'Back', collection_path(@resource)

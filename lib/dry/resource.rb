@@ -4,6 +4,7 @@ module Dry
       attrs_read:     [],
       attrs_write:    [],
       attrs_options:  {},
+      relations:      [],
       routes:         []
     }
 
@@ -33,6 +34,14 @@ module Dry
 
     def plural_name
       model_name.plural
+    end
+
+    def relations?
+      @options[:relations].any?
+    end
+
+    def relations
+      @options[:relations]
     end
 
     def new?

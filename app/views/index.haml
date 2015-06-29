@@ -37,6 +37,11 @@
                   %li= link_to 'Destroy', record_path(record), method: :delete,
                     data: { confirm: t('confirmation',
                       default: 'Are you sure?') }
+                - if @resource.relations?
+                  - @resource.relations.each do |relation|
+                    - relation = record.send(relation)
+                    %li= link_to relation.model_name.human.pluralize,
+                      relation_path(record, relation)
 
 
 %ul.actions

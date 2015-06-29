@@ -9,6 +9,9 @@ module Dry
       class_attribute :_dry_attrs, instance_accessor: false
       self._dry_attrs = { read: [], write: [], options: {} }
 
+      class_attribute :_dry_nested_relations, instance_accessor: false
+      self._dry_nested_relations = []
+
       append_view_path TemplateResolver.new
 
       helper RoutingHelpers
@@ -33,6 +36,10 @@ module Dry
 
       def dry_attrs_options **options
         self._dry_attrs[:options] = options
+      end
+
+      def dry_nest *relations
+        self._dry_nested_relations.push *relations
       end
     end
 
@@ -78,6 +85,7 @@ module Dry
         attrs_read:     self.class._dry_attrs[:read],
         attrs_write:    self.class._dry_attrs[:write],
         attrs_options:  self.class._dry_attrs[:options],
+        relations:      self.class._dry_nested_relations,
         routes:         resource_routes
       )
     end
