@@ -1,4 +1,4 @@
-= form_for form_arguments(@record) do |f|
+= form_for form_arguments(@record), html: { class: 'form' } do |f|
   %fieldset
     - @resource.each_form_fields do |attr, type|
       %p.field
