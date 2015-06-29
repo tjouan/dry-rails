@@ -1,5 +1,9 @@
 = form_for form_arguments(@record), html: { class: 'form' } do |f|
   %fieldset
+    - if lookup_context.exists?('form_fieldset_before',
+      %W[#{@resource.model_name.route_key}/dry], true)
+      = render "#{@resource.model_name.route_key}/dry/form_fieldset_before"
+
     - @resource.each_form_fields do |attr, type|
       %p.field
         - case type
