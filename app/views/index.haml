@@ -32,9 +32,9 @@
             %td.list-actions
               %ul.actions
                 - if @resource.edit?
-                  = link_to 'Edit', edit_path(record)
+                  %li= link_to 'Edit', edit_path(record)
                 - if @resource.destroy?
-                  = link_to 'Destroy', record_path(record), method: :delete,
+                  %li= link_to 'Destroy', record_path(record), method: :delete,
                     data: { confirm: t('confirmation',
                       default: 'Are you sure?') }
 
