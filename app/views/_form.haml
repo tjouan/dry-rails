@@ -17,7 +17,7 @@
             = f.send type, attr
 
     - if @record.errors.any?
-      .errors
+      .form-errors
         %p
           = pluralize @record.errors.size, 'error'
           prohibited this
@@ -27,8 +27,4 @@
           - @record.errors.full_messages.each do |error|
             %li= error
 
-  %ul.actions
-    %li
-      = f.button
-    %li
-      = link_to 'Back', collection_path(@resource)
+    = f.button
