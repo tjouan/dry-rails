@@ -7,7 +7,7 @@ module Dry
       class_attribute :_dry_scope, instance_accessor: false
 
       class_attribute :_dry_attrs, instance_accessor: false
-      self._dry_attrs = { read: [], write: {} }
+      self._dry_attrs = { read: [], write: [], options: {} }
 
       append_view_path TemplateResolver.new
 
@@ -29,6 +29,10 @@ module Dry
 
       def dry_attrs_write *attrs
         self._dry_attrs[:write] = attrs
+      end
+
+      def dry_attrs_options **options
+        self._dry_attrs[:options] = options
       end
     end
 
@@ -71,9 +75,10 @@ module Dry
 
     def resource
       @resource ||= Resource.new(controller_name.classify.constantize,
-        attrs_read:   self.class._dry_attrs[:read],
-        attrs_write:  self.class._dry_attrs[:write],
-        routes:       resource_routes
+        attrs_read:     self.class._dry_attrs[:read],
+        attrs_write:    self.class._dry_attrs[:write],
+        attrs_options:  self.class._dry_attrs[:options],
+        routes:         resource_routes
       )
     end
 
