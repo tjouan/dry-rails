@@ -25,7 +25,10 @@
       - @collection.each do |record|
         %tr
           %td
-            = link_to record, edit_path(record)
+            - if @resource.show?
+              = link_to record, record_path(record)
+            - else
+              = link_to record, edit_path(record)
           - @resource.attrs_read.each do |attr|
             %td= record.send attr
           - if @resource.edit? || @resource.destroy?

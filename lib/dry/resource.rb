@@ -44,6 +44,10 @@ module Dry
       @options[:relations]
     end
 
+    def show?
+      has_route_for? :show
+    end
+
     def new?
       has_route_for? :new
     end

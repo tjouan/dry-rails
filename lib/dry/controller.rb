@@ -46,6 +46,9 @@ module Dry
     def index
     end
 
+    def show
+    end
+
     def new
       @record = resource_scope.new
     end
